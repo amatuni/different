@@ -50,42 +50,14 @@ def knn_entropy(X, **kwargs):
 
     neighbors = brute_neighbors(X, parallel=parallel)
 
-    # vol = np.pi**(d/2)/gamma(d/2 + 1)
-    # accum = 0
-    # N = len(neighbors)
-    #
-    # for x in neighbors:
-    #     accum += np.log2((x[1]**d * vol * (N-1)) / np.exp(digamma(1)))
-
     d = X.shape[1]
     vol = np.pi**(d/2)/gamma(d/2 + 1)
     accum = 0
-    # N = len(neighbors)
     N = neighbors.shape[0]
-    # print(N)
 
     C = np.log((vol * (N-1))/np.exp(digamma(1)))
 
-    # l = d*np.log(np.array([x[1] for x in neighbors]))
-
-
-    # print(np.sum(d*np.log(neighbors[:,1])+C)/N)
-
-    # print((d*np.log(neighbors[:,1])+C)[:10])
-
-    # print([d * np.log(x[1]) + C for x in neighbors][:10])
-
-    # for x in neighbors:
-    #     # print(d * np.log(x[1]) + C)
-    #     accum += d * np.log(x[1]) + C
-
-    # c = np.log((1 / (2 * r)) ** d)
-
     return np.sum(d * np.log(neighbors[:, 1]) + C) / N
-
-    # print((np.sum(d * np.log(neighbors[:, 1]) + C) / N)-c)
-
-    # return accum/N
 
 
 def kde_entropy(X, **kwargs):
@@ -200,10 +172,11 @@ def par_neighb(Xs, X, idx, state):
 
     state[idx] = neighbors
 
+
 def mgr_init():
     # signal.signal(signal.SIGINT, mgr_sig_handler)
-    signal.signal(signal.SIGINT, signal.SIG_IGN) # <- OR do this to just ignore the signal
-
+    # <- OR do this to just ignore the signal
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
 
 
 def bound(X, r):
