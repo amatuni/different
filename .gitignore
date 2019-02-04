@@ -1,0 +1,10 @@
+.idea
+build
+tests/data
+tests/output
+.ropeproject
+diffent/__pycache__
+diffent.egg-info
+*.pyc
+exclude_list.txt
+*.sh
