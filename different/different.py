@@ -78,7 +78,7 @@ def kde_entropy(X, **kwargs):
     p = stats.gaussian_kde(X.T)
 
     def entropy_func(x):
-        return p(x) * np.log(p(x))
+        return p(x) * np.log(p(x)+0.000001)
 
     samples = np.random.uniform(-r, r, size=(N, p.d))
     vals = entropy_func(samples.T)
